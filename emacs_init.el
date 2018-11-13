@@ -60,11 +60,14 @@
 (load "elpy")
 (elpy-enable)
 
-;; Highlight lines over 80 long
-(setq-default
- whitespace-line-column 80
- whitespace-style       '(face lines-tail))
-(add-hook 'prog-mode-hook #'whitespace-mode)
+;; Highlight lines over 80 chars long in python mode
+(require 'whitespace)
+(add-hook 'python-mode-hook
+    (lambda ()
+        (progn
+            (setq whitespace-line-column 80)
+            (setq whitespace-style '(face lines-tail))
+            (whitespace-mode))))
 
 ;; Control inital window size
 (add-to-list 'initial-frame-alist '(width . 85))
