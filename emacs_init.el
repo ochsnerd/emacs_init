@@ -10,6 +10,13 @@
  '(highlight-symbol-idle-delay 0.3)
  '(highlight-symbol-on-navigation-p t)
  '(inhibit-default-init t))
+ 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
 
 
 ;; INSTALL PACKAGES
@@ -64,9 +71,9 @@
 
 ;; Highlight all occurences of the word under the point
 (add-hook 'prog-mode-hook #'highlight-symbol-mode)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+
+(setq yas-snippet-dirs
+      '("~/emacs_init/snippets"                 ;; personal snippets
+        ))
+
+(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
