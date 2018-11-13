@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: function_docstring_numpy
+# key: fun
+# --
+def ${1:name}($2):
+    \"\"\"$3
+
+    $4
+
+    Parameters
+    ----------
+    $5
+	$6
+    \"\"\"
+    $0
