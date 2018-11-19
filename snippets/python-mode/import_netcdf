@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: netcdf4
+# key: nc
+# --
+import netCDF4 as nc
