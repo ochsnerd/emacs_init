@@ -79,4 +79,6 @@
       '("~/emacs_init/snippets"                 ;; personal snippets
         ))
 
-(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
+(yas-global-mode 1)
+
+(delete-selection-mode 1)
