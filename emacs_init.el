@@ -75,8 +75,12 @@
 ;; Highlight all occurences of the word under the point
 (add-hook 'prog-mode-hook #'highlight-symbol-mode)
 
+;; yasnippets
 (setq yas-snippet-dirs
       '("~/emacs_init/snippets"                 ;; personal snippets
         ))
 
+;; Disable menu & tool bar
+;; (menu-bar-mode -1)
+(tool-bar-mode -1)
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
