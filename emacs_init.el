@@ -19,7 +19,7 @@
  )
 
 
-;; INSTALL PACKAGES
+;; PACKAGES -------------------------------------------------------------
 
 (require 'package)
 
@@ -47,46 +47,18 @@
       (package-install package)))
       myPackages)
 
-
-;; BASIC CUSTOMIZATION
-
-(setq inhibit-startup-message t) ;; hide the startup message
-(load-theme 'material t) ;; load material theme
-(global-linum-mode t) ;; enable line numbers globally
-
 ;; Manually load backported elpy package
 ;; clone the repo to the path below, checkout the backport branch
 (add-to-list 'load-path "~/.emacs.d/lisp/elpy")
 (load "elpy")
 (elpy-enable)
 
-;; Highlight lines over 80 chars long in python mode
-(require 'whitespace)
-(add-hook 'python-mode-hook
-    (lambda ()
-        (progn
-            (setq whitespace-line-column 80)
-            (setq whitespace-style '(face lines-tail))
-            (whitespace-mode))))
-
-;; Control inital window size
-(add-to-list 'initial-frame-alist '(width . 85))
-
-;; Highlight all occurences of the word under the point
-(add-hook 'prog-mode-hook #'highlight-symbol-mode)
-
+;; CUSTOMIZATION----------------------------------------------------------------
 ;; yasnippets
 (setq yas-snippet-dirs
       '("~/emacs_init/snippets"                 ;; personal snippets
         ))
-
-;; Disable menu & tool bar
-;; (menu-bar-mode -1)
-(tool-bar-mode -1)
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
-
-;; Highlight matching parentheses
-(show-paren-mode)
 
 ;; Make backups into .saves
 (setq
@@ -98,10 +70,39 @@
   kept-old-versions 2
   version-control t)       ; use versioned backups
 
-;; No toolbar
+;; Visual changes -----------------------------------------------------------------------
+;; Hide the startup message
+(setq inhibit-startup-message t)
+
+;; Load material theme
+(load-theme 'material t)
+
+;; Enable line numbers globally 
+(global-linum-mode t)
+
+;; Disable menu & tool bar
+;; (menu-bar-mode -1)
 (tool-bar-mode -1)
 
-;; org-mode
+;; Highlight matching parentheses
+(show-paren-mode)
+
+;; Highlight all occurences of the word under the point
+(add-hook 'prog-mode-hook #'highlight-symbol-mode)
+
+;; Control inital window size
+(add-to-list 'initial-frame-alist '(width . 85))
+
+;; Highlight lines over 79 chars long in python mode
+(require 'whitespace)
+(add-hook 'python-mode-hook
+    (lambda ()
+        (progn
+            (setq whitespace-line-column 79)
+            (setq whitespace-style '(face lines-tail))
+            (whitespace-mode))))
+
+;; Org-mode ---------------------------------------------------------------------------
 ;; Babel
 (org-babel-do-load-languages
  'org-babel-load-languages
