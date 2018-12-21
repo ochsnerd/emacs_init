@@ -80,3 +80,36 @@
         ))
 
 (yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
+
+;; Highlight matching parentheses
+(show-paren-mode)
+
+;; Make backups into .saves
+(setq
+  backup-by-copying t      ; don't clobber symlinks
+  backup-directory-alist
+   '(("." . "~/.saves/"))    ; don't litter my fs tree
+  delete-old-versions t
+  kept-new-versions 6
+  kept-old-versions 2
+  version-control t)       ; use versioned backups
+
+;; No toolbar
+(tool-bar-mode -1)
+
+;; org-mode
+;; Babel
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (python . t)
+   (sh . t)
+   ))
+
+;; DONE if all children are DONE
+(defun org-summary-todo (n-done n-not-done)
+  "Switch entry to DONE when all subentries are done, to TODO otherwise."
+  (let (org-log-done org-log-states)   ; turn off logging
+    (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
+
+(add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
