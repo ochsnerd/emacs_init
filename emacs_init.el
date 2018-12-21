@@ -75,10 +75,12 @@
 ;; Highlight all occurences of the word under the point
 (add-hook 'prog-mode-hook #'highlight-symbol-mode)
 
+;; Snippets
 (setq yas-snippet-dirs
       '("~/emacs_init/snippets"                 ;; personal snippets
         ))
-
 (yas-global-mode 1)
 
+;; Delete selection on any input
 (delete-selection-mode 1)
+  
