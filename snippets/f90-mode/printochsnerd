@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: printochsnerd
+# key: printo
+# --
+IF (my_world_id == 0) THEN
+  PRINT *, 'ochsnerd: $1'
+ENDIF

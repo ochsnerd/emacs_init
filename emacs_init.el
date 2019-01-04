@@ -20,7 +20,6 @@
 
 
 ;; PACKAGES -------------------------------------------------------------
-
 (require 'package)
 
 (add-to-list 'package-archives
@@ -93,6 +92,11 @@
 ;; Control inital window size
 (add-to-list 'initial-frame-alist '(width . 85))
 
+;; Delete selection on any input
+(delete-selection-mode 1)
+
+;; Mode specific changes----------------------------------------------------------------
+;; python-mode -------------------------------------------------------------------------
 ;; Highlight lines over 79 chars long in python mode
 (require 'whitespace)
 (add-hook 'python-mode-hook
@@ -102,10 +106,19 @@
             (setq whitespace-style '(face lines-tail))
             (whitespace-mode))))
 
-;; Delete selection on any input
-(delete-selection-mode 1)
+;; f90-mode ----------------------------------------------------------------------------
+(eval-after-load 'f90
+  '(define-key f90-mode-map (kbd "M-A") 'f90-beginning-of-subprogram))
+(eval-after-load 'f90
+  '(define-key f90-mode-map (kbd "M-E") 'f90-end-of-subprogram))
+(eval-after-load 'f90
+  '(define-key f90-mode-map (kbd "M-a") 'f90-beginning-of-block))
+(eval-after-load 'f90
+  '(define-key f90-mode-map (kbd "M-e") 'f90-end-of-block))
 
-;; Org-mode ---------------------------------------------------------------------------
+
+
+;; Org-mode ----------------------------------------------------------------------------
 ;; Babel
 (org-babel-do-load-languages
  'org-babel-load-languages
