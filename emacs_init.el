@@ -9,7 +9,8 @@
  '(diff-switches "-u")
  '(highlight-symbol-idle-delay 0.3)
  '(highlight-symbol-on-navigation-p t)
- '(inhibit-default-init t))
+ '(inhibit-default-init t)
+ '(safe-local-variable-values (quote ((org-todo-keyword-faces ("TODO" :foreground "#f9f7f7" :background "#8e1d1d" :weight bold) ("DOING" :foreground "#f9f7f7" :background "#09bfad" :weight bold) ("WAIT" :foreground "#f9f7f7" :background "#a35706" :weight bold) ("DONE" :foreground "#154702" :background "#1b770d")) (org-todo-keyword-faces ("TODO" :foreground "white" :background "red") ("DOING" . "orange") ("WAIT" . "yellow") ("DONE" . "green"))))))
  
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -57,17 +58,24 @@
 (setq yas-snippet-dirs
       '("~/emacs_init/snippets"                 ;; personal snippets
         ))
-(yas-global-mode 1) ;; or M-x yas-reload-all if you've started YASnippet already.
+(yas-global-mode 1)
 
 ;; Make backups into .saves
 (setq
   backup-by-copying t      ; don't clobber symlinks
   backup-directory-alist
-   '(("." . "~/.saves/"))    ; don't litter my fs tree
+    '(("." . "~/.saves/"))
   delete-old-versions t
   kept-new-versions 6
   kept-old-versions 2
   version-control t)       ; use versioned backups
+
+;; Make autosaves into .saves
+(setq auto-save-file-name-transforms
+  '((".*" "~/.saves/" t)))
+
+;; Don't create lockfiles
+(setq create-lockfiles nil)
 
 ;; Visual changes -----------------------------------------------------------------------
 ;; Hide the startup message
