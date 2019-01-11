@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: accblock
+# key: accb
+# --
+!$acc $1
+
+!$acc end $1
