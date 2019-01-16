@@ -40,7 +40,9 @@
     yasnippet
     company
     pyvenv
-    find-file-in-project))
+    find-file-in-project
+    evil
+    ))
 
 (mapc #'(lambda (package)
     (unless (package-installed-p package)
@@ -54,6 +56,17 @@
 (elpy-enable)
 
 ;; CUSTOMIZATION----------------------------------------------------------------
+;; evil mode
+(require 'evil)
+(evil-mode 1)
+
+(setq evil-move-cursor-back t
+      evil-move-beyond-eol t)
+
+(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
+
+
 ;; yasnippets
 (setq yas-snippet-dirs
       '("~/emacs_init/snippets"                 ;; personal snippets
@@ -77,12 +90,55 @@
 ;; Don't create lockfiles
 (setq create-lockfiles nil)
 
+;; Copy to point, not mouse click
+(setq mouse-yank-at-point t)
+
+;; Kill the daemon humanely
+;; define function to shutdown emacs server instance
+(defun server-shutdown ()
+  "Save buffers, Quit, and Shutdown (kill) server"
+  (interactive)
+  (save-some-buffers)
+  (kill-emacs)
+  )
+
 ;; Visual changes -----------------------------------------------------------------------
 ;; Hide the startup message
 (setq inhibit-startup-message t)
 
-;; Load material theme
-(load-theme 'material t)
+;; Load material theme in a way that it works with the daemon
+(if (daemonp)
+    (add-hook 'after-make-frame-functions
+        (lambda (frame)
+            (select-frame frame)
+            (load-theme 'material t)))
+    (load-theme 'material t))
+
+;; From https://stackoverflow.com/a/34697306, somehow fucks the bg of the terminal
+;;(defvar my:theme 'material)
+;;(defvar my:theme-window-loaded nil)
+;;(defvar my:theme-terminal-loaded nil)
+
+;;(if (daemonp)
+;;    (add-hook 'after-make-frame-functions(lambda (frame)
+;;                       (select-frame frame)
+;;                       (if (window-system frame)
+;;                           (unless my:theme-window-loaded
+;;                             (if my:theme-terminal-loaded
+;;                                 (enable-theme my:theme)
+;;                               (load-theme my:theme t))
+;;                             (setq my:theme-window-loaded t))
+;;                         (unless my:theme-terminal-loaded
+;;                           (if my:theme-window-loaded
+;;                               (enable-theme my:theme)
+;;                             (load-theme my:theme t))
+;;                           (setq my:theme-terminal-loaded t)))))
+
+;;  (progn
+;;    (load-theme my:theme t)
+;;    (if (display-graphic-p)
+;;        (setq my:theme-window-loaded t)
+;;      (setq my:theme-terminal-loaded t))))
 
 ;; Enable line numbers globally 
 (global-linum-mode t)
