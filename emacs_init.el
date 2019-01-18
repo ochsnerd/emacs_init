@@ -36,6 +36,7 @@
     fill-column-indicator
     highlight-symbol
     evil
+    csv-mode
     ;; Manually load dependencies for elpy; need to install 's' by hand from melpa
     highlight-indentation
     yasnippet
