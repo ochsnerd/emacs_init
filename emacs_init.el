@@ -35,13 +35,13 @@
     material-theme
     fill-column-indicator
     highlight-symbol
+    evil
     ;; Manually load dependencies for elpy; need to install 's' by hand from melpa
     highlight-indentation
     yasnippet
     company
     pyvenv
     find-file-in-project
-    evil
     ))
 
 (mapc #'(lambda (package)
@@ -56,17 +56,6 @@
 (elpy-enable)
 
 ;; CUSTOMIZATION----------------------------------------------------------------
-;; evil mode
-(require 'evil)
-(evil-mode 1)
-
-(setq evil-move-cursor-back t
-      evil-move-beyond-eol t)
-
-(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
-(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
-
-
 ;; yasnippets
 (setq yas-snippet-dirs
       '("~/emacs_init/snippets"                 ;; personal snippets
@@ -103,6 +92,9 @@
   )
 
 ;; Visual changes -----------------------------------------------------------------------
+;; Font
+;; (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono Roman-11" ))
+
 ;; Hide the startup message
 (setq inhibit-startup-message t)
 
@@ -160,6 +152,20 @@
 (delete-selection-mode 1)
 
 ;; Mode specific changes----------------------------------------------------------------
+;; evil-mode----------------------------------------------------------------------------
+(require 'evil)
+(evil-mode 1)
+
+(setq evil-move-cursor-back t
+      evil-move-beyond-eol t)
+
+(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
+(define-key evil-normal-state-map (kbd "C-h") 'evil-window-left)
+(define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
+(define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
+(define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
 ;; python-mode -------------------------------------------------------------------------
 ;; Highlight lines over 79 chars long in python mode
 (require 'whitespace)
@@ -179,7 +185,6 @@
   '(define-key f90-mode-map (kbd "M-a") 'f90-beginning-of-block))
 (eval-after-load 'f90
   '(define-key f90-mode-map (kbd "M-e") 'f90-end-of-block))
-
 
 
 ;; Org-mode ----------------------------------------------------------------------------
