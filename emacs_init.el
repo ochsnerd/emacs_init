@@ -37,6 +37,8 @@
     highlight-symbol
     evil
     csv-mode
+    powerline
+    linum-relative
     ;; Manually load dependencies for elpy; need to install 's' by hand from melpa
     highlight-indentation
     yasnippet
@@ -93,6 +95,11 @@
   )
 
 ;; Visual changes -----------------------------------------------------------------------
+;; Powerline
+(require 'powerline)
+(require 'powerline-evil)
+(powerline-evil-vim-color-theme)
+
 ;; Font
 ;; (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono Roman-11" ))
 
@@ -133,8 +140,12 @@
 ;;        (setq my:theme-window-loaded t)
 ;;      (setq my:theme-terminal-loaded t))))
 
-;; Enable line numbers globally 
-(global-linum-mode t)
+;; Enable line numbers globally
+(linum-mode)
+(linum-relative-global-mode)
+(setq linum-relative-current-symbol "")
+;; old:
+;;(global-linum-mode t)
 
 ;; Disable menu & tool bar
 ;; (menu-bar-mode -1)
@@ -158,7 +169,8 @@
 (evil-mode 1)
 
 (setq evil-move-cursor-back t
-      evil-move-beyond-eol t)
+      evil-move-beyond-eol t
+      evil-want-fine-undo t)
 
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
