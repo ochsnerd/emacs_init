@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: model_abort
+# key: abort
+# --
+CALL model_abort(my_cart_id, 1, "It is His wish", "somewhere")

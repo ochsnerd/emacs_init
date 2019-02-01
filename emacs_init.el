@@ -199,6 +199,10 @@
 (eval-after-load 'f90
   '(define-key f90-mode-map (kbd "M-e") 'f90-end-of-block))
 
+(add-hook 'f90-mode-hook
+  (function (lambda ()
+    (setq indent-tabs-mode nil
+          tab-width 2))))
 
 ;; Org-mode ----------------------------------------------------------------------------
 ;; Babel
@@ -208,6 +212,8 @@
    (python . t)
    (sh . t)
    ))
+
+(setq org-src-fontify-natively t)
 
 ;; DONE if all children are DONE
 (defun org-summary-todo (n-done n-not-done)
