@@ -94,6 +94,9 @@
   (kill-emacs)
   )
 
+;; Always ask before closing
+(setq confirm-kill-emacs 'y-or-n-p)
+
 ;; Visual changes -----------------------------------------------------------------------
 ;; Powerline
 (require 'powerline)
