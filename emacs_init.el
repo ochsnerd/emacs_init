@@ -10,7 +10,21 @@
  '(highlight-symbol-idle-delay 0.3)
  '(highlight-symbol-on-navigation-p t)
  '(inhibit-default-init t)
- '(safe-local-variable-values (quote ((org-todo-keyword-faces ("TODO" :foreground "#f9f7f7" :background "#8e1d1d" :weight bold) ("DOING" :foreground "#f9f7f7" :background "#09bfad" :weight bold) ("WAIT" :foreground "#f9f7f7" :background "#a35706" :weight bold) ("DONE" :foreground "#154702" :background "#1b770d")) (org-todo-keyword-faces ("TODO" :foreground "white" :background "red") ("DOING" . "orange") ("WAIT" . "yellow") ("DONE" . "green"))))))
+ '(package-selected-packages
+   (quote
+    (evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
+ '(safe-local-variable-values
+   (quote
+    ((org-todo-keyword-faces
+      ("TODO" :foreground "#f9f7f7" :background "#8e1d1d" :weight bold)
+      ("DOING" :foreground "#f9f7f7" :background "#09bfad" :weight bold)
+      ("WAIT" :foreground "#f9f7f7" :background "#a35706" :weight bold)
+      ("DONE" :foreground "#154702" :background "#1b770d"))
+     (org-todo-keyword-faces
+      ("TODO" :foreground "white" :background "red")
+      ("DOING" . "orange")
+      ("WAIT" . "yellow")
+      ("DONE" . "green"))))))
  
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -18,8 +32,6 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
-
-
 ;; PACKAGES -------------------------------------------------------------
 (require 'package)
 
@@ -54,8 +66,8 @@
 
 ;; Manually load backported elpy package
 ;; clone the repo to the path below, checkout the backport branch
-(add-to-list 'load-path "~/.emacs.d/lisp/elpy")
-(load "elpy")
+;;(add-to-list 'load-path "~/.emacs.d/lisp/elpy")
+;;(load "elpy")
 (elpy-enable)
 
 ;; CUSTOMIZATION----------------------------------------------------------------
@@ -117,42 +129,17 @@
             (load-theme 'material t)))
     (load-theme 'material t))
 
-;; From https://stackoverflow.com/a/34697306, somehow fucks the bg of the terminal
-;;(defvar my:theme 'material)
-;;(defvar my:theme-window-loaded nil)
-;;(defvar my:theme-terminal-loaded nil)
-
-;;(if (daemonp)
-;;    (add-hook 'after-make-frame-functions(lambda (frame)
-;;                       (select-frame frame)
-;;                       (if (window-system frame)
-;;                           (unless my:theme-window-loaded
-;;                             (if my:theme-terminal-loaded
-;;                                 (enable-theme my:theme)
-;;                               (load-theme my:theme t))
-;;                             (setq my:theme-window-loaded t))
-;;                         (unless my:theme-terminal-loaded
-;;                           (if my:theme-window-loaded
-;;                               (enable-theme my:theme)
-;;                             (load-theme my:theme t))
-;;                           (setq my:theme-terminal-loaded t)))))
-
-;;  (progn
-;;    (load-theme my:theme t)
-;;    (if (display-graphic-p)
-;;        (setq my:theme-window-loaded t)
-;;      (setq my:theme-terminal-loaded t))))
-
 ;; Enable line numbers globally
 (linum-mode)
 (linum-relative-global-mode)
 (setq linum-relative-current-symbol "")
-;; old:
-;;(global-linum-mode t)
 
 ;; Disable menu & tool bar
-;; (menu-bar-mode -1)
+(menu-bar-mode -1)
 (tool-bar-mode -1)
+
+;; Disable scroll bar
+(scroll-bar-mode -1)
 
 ;; Highlight matching parentheses
 (show-paren-mode)
@@ -181,6 +168,11 @@
 (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+;; magit -------------------------------------------------------------------------------
+(require 'magit)
+(require 'evil-magit)
+(global-set-key (kbd "C-x g") 'magit-status)
 
 ;; python-mode -------------------------------------------------------------------------
 ;; Highlight lines over 79 chars long in python mode
@@ -213,7 +205,6 @@
  'org-babel-load-languages
  '(
    (python . t)
-   (sh . t)
    ))
 
 (setq org-src-fontify-natively t)
