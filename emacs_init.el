@@ -97,6 +97,14 @@
 ;; Always ask before closing
 (setq confirm-kill-emacs 'y-or-n-p)
 
+;; Fill line
+(defun fill-to-end (char)
+  (interactive "cFill Character:")
+  (save-excursion
+    (end-of-line)
+    (while (< (current-column) 79)
+      (insert-char char))))
+
 ;; Visual changes -----------------------------------------------------------------------
 ;; Powerline
 (require 'powerline)
@@ -151,7 +159,7 @@
 ;;(global-linum-mode t)
 
 ;; Disable menu & tool bar
-;; (menu-bar-mode -1)
+(menu-bar-mode -1)
 (tool-bar-mode -1)
 
 ;; Highlight matching parentheses
@@ -201,6 +209,9 @@
   '(define-key f90-mode-map (kbd "M-a") 'f90-beginning-of-block))
 (eval-after-load 'f90
   '(define-key f90-mode-map (kbd "M-e") 'f90-end-of-block))
+
+(eval-after-load 'f90
+  '(define-key f90-mode-map (kbd "M-c") 'fill-to-end))
 
 (add-hook 'f90-mode-hook
   (function (lambda ()
