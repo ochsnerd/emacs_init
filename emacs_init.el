@@ -177,6 +177,11 @@
 (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
 (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
 
+;; Treat _ as part of a word
+;; https://emacs.stackexchange.com/a/20717
+(with-eval-after-load 'evil
+    (defalias #'forward-evil-word #'forward-evil-symbol))
+
 ;; magit -------------------------------------------------------------------------------
 (require 'magit)
 (require 'evil-magit)
