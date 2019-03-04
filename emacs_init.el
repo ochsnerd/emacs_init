@@ -207,13 +207,27 @@
 (eval-after-load 'f90
   '(define-key f90-mode-map (kbd "M-e") 'f90-end-of-block))
 
+;; Fill line with whitespace and line contiuation at column 80
+(defun insert-line-continuation ()
+  (interactive)
+  (save-excursion
+    (end-of-line)
+    (while (< (current-column) 79)
+      (insert-char ? ))
+    (insert-char ?&)))
+
 (eval-after-load 'f90
-  '(define-key f90-mode-map (kbd "M-c") 'fill-to-end))
+  '(define-key f90-mode-map (kbd "M-c") 'insert-line-continuation))
 
 (add-hook 'f90-mode-hook
   (function (lambda ()
     (setq indent-tabs-mode nil
           tab-width 2))))
+
+(setq f90-do-indent 2
+      f90-if-indent 2
+      f90-type-indent 2
+      f90-program-indent 2)
 
 ;; Org-mode ----------------------------------------------------------------------------
 ;; Babel
