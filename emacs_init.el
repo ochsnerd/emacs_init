@@ -12,7 +12,7 @@
  '(inhibit-default-init t)
  '(package-selected-packages
    (quote
-    (evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
+    (helm evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
  '(safe-local-variable-values
    (quote
     ((org-todo-keyword-faces
@@ -32,6 +32,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+ 
 ;; PACKAGES -------------------------------------------------------------
 (require 'package)
 
@@ -48,15 +49,13 @@
     fill-column-indicator
     highlight-symbol
     evil
+    evil-collection
     csv-mode
     powerline
     linum-relative
-    ;; Manually load dependencies for elpy; need to install 's' by hand from melpa
-    highlight-indentation
     yasnippet
-    company
-    pyvenv
-    find-file-in-project
+    helm
+    magit
     ))
 
 (mapc #'(lambda (package)
@@ -68,7 +67,7 @@
 ;; clone the repo to the path below, checkout the backport branch
 ;;(add-to-list 'load-path "~/.emacs.d/lisp/elpy")
 ;;(load "elpy")
-(elpy-enable)
+
 
 ;; CUSTOMIZATION----------------------------------------------------------------
 ;; yasnippets
@@ -120,8 +119,6 @@
 ;; Visual changes -----------------------------------------------------------------------
 ;; Powerline
 (require 'powerline)
-(require 'powerline-evil)
-(powerline-evil-vim-color-theme)
 
 ;; Font
 ;; (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono Roman-11" ))
@@ -163,6 +160,8 @@
 
 ;; Mode specific changes----------------------------------------------------------------
 ;; evil-mode----------------------------------------------------------------------------
+(setq evil-want-integration t)  ;; for evil-collection
+(setq evil-want-keybinding nil) ;; ^
 (require 'evil)
 (evil-mode 1)
 
@@ -181,13 +180,31 @@
 ;; https://emacs.stackexchange.com/a/20717
 (with-eval-after-load 'evil
     (defalias #'forward-evil-word #'forward-evil-symbol))
+    
+(when (require 'evil-collection nil t)
+  (evil-collection-init))
+(setq evil-collection-setup-minibuffer t)
+
+;; evil-specific powerline
+(require 'powerline-evil)
+(powerline-evil-vim-color-theme)
 
 ;; magit -------------------------------------------------------------------------------
 (require 'magit)
 (require 'evil-magit)
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; helm --------------------------------------------------------------------------------
+(require 'helm-config)
+(global-set-key (kbd "M-x") #'helm-M-x)
+(global-set-key (kbd "C-x r b") #'helm-filtered-bookmarks)
+(global-set-key (kbd "C-x C-f") #'helm-find-files)
+
+(helm-mode 1)
+
 ;; python-mode -------------------------------------------------------------------------
+(elpy-enable)
+
 ;; Highlight lines over 79 chars long in python mode
 (require 'whitespace)
 (add-hook 'python-mode-hook
