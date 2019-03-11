@@ -1,1 +1,1 @@
-init-file for emacs 23.4
+init-file for emacs 26.1
