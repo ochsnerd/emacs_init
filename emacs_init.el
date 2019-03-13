@@ -12,7 +12,7 @@
  '(inhibit-default-init t)
  '(package-selected-packages
    (quote
-    (spaceline helm evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
+    (flymd spaceline helm evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
  '(safe-local-variable-values
    (quote
     ((org-todo-keyword-faces
@@ -215,6 +215,10 @@
             (setq whitespace-line-column 79)
             (setq whitespace-style '(face lines-tail))
             (whitespace-mode))))
+            
+;; flymd (render markup in browser)-----------------------------------------------------
+(require 'flymd)
+(setq flymd-close-buffer-delete-temp-files t)
 
 ;; f90-mode ----------------------------------------------------------------------------
 (eval-after-load 'f90
