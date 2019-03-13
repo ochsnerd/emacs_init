@@ -12,7 +12,7 @@
  '(inhibit-default-init t)
  '(package-selected-packages
    (quote
-    (helm evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
+    (spaceline helm evil-magit magit yasnippet s pyvenv py-autopep8 powerline-evil popup material-theme linum-relative highlight-symbol highlight-indentation find-file-in-project fill-column-indicator egg csv-mode company better-defaults async)))
  '(safe-local-variable-values
    (quote
     ((org-todo-keyword-faces
@@ -119,6 +119,8 @@
 ;; Visual changes -----------------------------------------------------------------------
 ;; Powerline
 (require 'powerline)
+(require 'spaceline-config)
+(spaceline-spacemacs-theme)
 
 ;; Font
 ;; (add-to-list 'default-frame-alist '(font . "Bitstream Vera Sans Mono Roman-11" ))
@@ -186,8 +188,8 @@
 (setq evil-collection-setup-minibuffer t)
 
 ;; evil-specific powerline
-(require 'powerline-evil)
-(powerline-evil-vim-color-theme)
+;; (require 'powerline-evil)
+;; (powerline-evil-vim-color-theme)
 
 ;; magit -------------------------------------------------------------------------------
 (require 'magit)
