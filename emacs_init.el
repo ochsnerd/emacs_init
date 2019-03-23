@@ -52,10 +52,14 @@
     evil-collection
     csv-mode
     powerline
+    spaceline
     linum-relative
     yasnippet
     helm
     magit
+    evil-magit
+    elpy
+    flymd
     ))
 
 (mapc #'(lambda (package)
