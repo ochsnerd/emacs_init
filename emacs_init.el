@@ -80,6 +80,9 @@
         ))
 (yas-global-mode 1)
 
+;; use ibuffer instead of list-buffers
+(defalias 'list-buffers 'ibuffer)
+
 ;; Make backups into .saves
 (setq
   backup-by-copying t      ; don't clobber symlinks
@@ -190,6 +193,9 @@
 (when (require 'evil-collection nil t)
   (evil-collection-init))
 (setq evil-collection-setup-minibuffer t)
+
+;; use ibuffer for :ls
+(evil-ex-define-cmd "ls" 'ibuffer)
 
 ;; evil-specific powerline
 ;; (require 'powerline-evil)
