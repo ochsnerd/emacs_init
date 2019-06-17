@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: real
+# key: real
+# --
+REAL (KIND=wp)                            ::                                  &

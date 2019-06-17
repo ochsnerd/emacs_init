@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: subroutine
+# key: subr
+# --
+SUBROUTINE $1($2)
+  !----------------------------------------------------------------------------
+  ! Description:
+  !   $3
+  !----------------------------------------------------------------------------
+  ${4:Routine Parameters}
+
+  ${5:Local variables}
+
+  $0
+
+END SUBROUTINE $1
