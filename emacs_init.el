@@ -279,3 +279,15 @@
     (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
 
 (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
+
+;; Keybinds for different platforms ----------------------------------------------------
+(when (string-equal (system-name) "SHADOW-2J5B09AG")
+  (define-key key-translation-map [(control meta ?p)] [?\[])
+  (define-key key-translation-map [(control meta ?ü)] [?\]])
+  (define-key key-translation-map [(control meta ?ö)] [?\{])
+  (define-key key-translation-map [(control meta ?ä)] [?\}])
+  (define-key key-translation-map [(control meta ?3)] [?\#])
+  (define-key key-translation-map [(control meta ?<)] [?\\])
+
+  (global-set-key (kbd "M-<backspace>") 'delete-forward-char)
+  )
