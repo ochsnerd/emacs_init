@@ -70,10 +70,16 @@
   :config
     (global-set-key (kbd "C-x g") 'magit-status))
 
+;; Python
 (use-package elpy
   :ensure t
   :init
   (elpy-enable))
+
+;; C++
+(add-hook 'c++-mode-hook
+          (lambda () (local-set-key (kbd "C-c c") 'compile)))
+
 
 ;; Visual changes
 (set-frame-font "hack 11" nil t)
