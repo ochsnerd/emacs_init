@@ -111,6 +111,22 @@
 ;; Delete selection on any input
 (delete-selection-mode 1)
 
+;; Keybindings for mac
+(when (string-equal system-type "darwin")
+  ;; This seems ugly, but works,  soo...
+  (global-set-key (kbd "§") (lambda () (interactive) (insert "[")))
+  (global-set-key (kbd "‘") (lambda () (interactive) (insert "]")))
+  (global-set-key (kbd "æ") (lambda () (interactive) (insert "{")))
+  (global-set-key (kbd "¶") (lambda () (interactive) (insert "}")))
+
+  (global-set-key (kbd "M-<backspace>") 'delete-forward-char)
+
+  (setq mac-option-key-is-meta nil)
+  (setq mac-command-key-is-meta t)
+  (setq mac-command-modifier 'meta)
+  (setq mac-option-modifier nil)
+)
+
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
