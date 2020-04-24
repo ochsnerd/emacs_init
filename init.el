@@ -5,6 +5,8 @@
 
 (package-initialize)
 
+(add-to-list 'load-path "~/emacs_init/manual_packages")
+
 (use-package evil
   :ensure t
   :init
@@ -19,6 +21,8 @@
     (define-key evil-normal-state-map (kbd "C-j") 'evil-window-down)
     (define-key evil-normal-state-map (kbd "C-k") 'evil-window-up)
     (define-key evil-normal-state-map (kbd "C-l") 'evil-window-right)
+
+    (evil-ex-define-cmd "ls" 'helm-mini)
 
     (defalias #'forward-evil-word #'forward-evil-symbol)
 
@@ -74,12 +78,29 @@
 (use-package elpy
   :ensure t
   :init
-  (elpy-enable))
+  (elpy-enable)
+  (setq elpy-rpc-virtualenv-path 'current)
+)
 
 ;; C++
 (add-hook 'c++-mode-hook
           (lambda () (local-set-key (kbd "C-c c") 'compile)))
 
+;; Orgmode
+(use-package org
+  :config
+  (add-to-list 'org-latex-packages-alist '("" "minted"))
+  (setq org-latex-listings 'minted) 
+)
+
+(use-package ox-bibtex
+  :init
+  (setq org-latex-pdf-process
+        '("pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "bibtex %b"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"
+          "pdflatex -shell-escape -interaction nonstopmode -output-directory %o %f"))
+)
 
 ;; Visual changes
 (set-frame-font "hack 11" nil t)
@@ -132,10 +153,19 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages (quote (evil use-package))))
+ '(package-selected-packages
+   (quote
+    (better-defaults evil-magit fill-column-indicator highlight-symbol linum-relative magit material-theme powerline-evil spaceline evil use-package)))
+ '(safe-local-variable-values
+   (quote
+    ((org-todo-keyword-faces
+      ("TODO" :foreground "#f9f7f7" :background "#8e1d1d" :weight bold)
+      ("DOING" :foreground "#f9f7f7" :background "#09bfad" :weight bold)
+      ("WAIT" :foreground "#f9f7f7" :background "#a35706" :weight bold)
+      ("DONE" :foreground "#154702" :background "#1b770d"))))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 89)) (:foreground "#ffffff" :background "#263238")))))
