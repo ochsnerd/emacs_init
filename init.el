@@ -155,7 +155,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (better-defaults evil-magit fill-column-indicator highlight-symbol linum-relative magit material-theme powerline-evil spaceline evil use-package)))
+    (virtualenvwrapper better-defaults evil-magit fill-column-indicator highlight-symbol linum-relative magit material-theme powerline-evil spaceline evil use-package)))
  '(safe-local-variable-values
    (quote
     ((org-todo-keyword-faces
