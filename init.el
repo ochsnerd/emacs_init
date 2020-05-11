@@ -90,7 +90,8 @@
 (use-package org
   :config
   (add-to-list 'org-latex-packages-alist '("" "minted"))
-  (setq org-latex-listings 'minted) 
+  (setq org-latex-listings 'minted)
+  (setq org-latex-prefer-user-labels t)
 )
 
 (use-package ox-bibtex
