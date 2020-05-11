@@ -80,7 +80,9 @@
   :init
   (elpy-enable)
   (setq elpy-rpc-virtualenv-path 'current)
-)
+  ;; so this is not very portable
+  (setq venv-location "~/anaconda3/envs")
+  )
 
 ;; C++
 (add-hook 'c++-mode-hook
