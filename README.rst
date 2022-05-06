@@ -1,1 +1,1 @@
-init-file for emacs 26.1
+doom config
