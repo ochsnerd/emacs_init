@@ -14,11 +14,8 @@
 
 * Stuff to check out
 
-- Language server for python (=SPC h d h= lsp), https://github.com/palantir/python-language-server
-- Also figure out if/how to have a specific emacs python environment (or not, idk)
-- Migrate specific stuff from my old init.el; or figure out the built-in alternatives. Specifically:
-- Put this file up on gh
-  - Change the tangle-targets to absolute paths
+
+- Change the tangle-targets to absolute paths
 - Is there a reasonable way to have a global org-directory and access it (also from within empa)
 
 
@@ -171,7 +168,7 @@ Theres an ~init.example.el~ in ~~/.emacs.d~.
        ;;ess               ; emacs speaks statistics
        ;;factor
        ;;faust             ; dsp, but you get to keep your soul
-       fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
+       ;;fortran           ; in FORTRAN, GOD is REAL (unless declared INTEGER)
        ;;fsharp            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
@@ -196,7 +193,7 @@ Theres an ~init.example.el~ in ~~/.emacs.d~.
        ;;php               ; perl's insecure younger brother
        ;;plantuml          ; diagrams for confusing people more
        ;;purescript        ; javascript, but functional
-       (python +pyenv +lsp)
+       (python +pyenv +lsp)  ; maybe add +pyright if other lsps dont work
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6
@@ -283,6 +280,11 @@ Theres an ~init.example.el~ in ~~/.emacs.d~.
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/org/")
 
+(after! magit
+  (setq magit-diff-hide-trailing-cr-characters t))
+
+(after! auth-source
+  (setq auth-sources '("~/.authinfo")))
 
 ;; Whenever you reconfigure a package, make sure to wrap your config in an
 ;; `after!' block, otherwise Doom's defaults may override your settings. E.g.
